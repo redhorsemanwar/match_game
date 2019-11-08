@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Matching Game</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Matching Game">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Coda">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="img/memory-game-logo.jpg">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+const StopWatch = function StopWatch() {
+  const self = this;
+
+  let hours = 0;
+  let minutes = 0;
+  let seconds = 0;
+
+  let timer;
+  let on = false;
+
+  self.startTimer = function(callback) {
+    if(on === true) { console.log('timer is already on.'); return; }
+    on = true;
+    timer = setInterval(function(){
+      seconds++;
+      if(seconds === 60) {
+        seconds = 0;
+        minutes++;
+        if(minutes === 60) {
+          minutes = 0;
+          hours++;
+        }
+      }
+      if(callback && callback.constructor === Function) {
+        callback();
+      }
+    }, 1000);
+    console.log('timer started');
+  }
+
+  self.stopTimer = function() {
+    clearInterval(timer);
+    on = false;
+    console.log('timer ended: ', self.getTimeString());
+  }
+
+  self.resetTimer = function() {
+    self.stopTimer();
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
+  }
+
+  self.getTimeString = function() {
+    let hour = hours > 9 ? String(hours) : '0' + String(hours);
+    let minute = minutes > 9 ? String(minutes) : '0' + String(minutes);
+    let second = seconds > 9 ? String(seconds) : '0' + String(seconds);
+    let timeString = hour + ':' + minute + ':' + second;
+    return timeString;
+  }
+
+  self.getTimeObj = function() {
+    return {
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds
+    };
+  }
+  
+  self.getTimeObjFormatted = function() {
+    return {
+      hours: hours > 9 ? String(hours) : '0' + String(hours),
+      minutes: minutes > 9 ? String(minutes) : '0' + String(minutes),
+      seconds: seconds > 9 ? String(seconds) : '0' + String(seconds)
+    };
+  }
+  
+  self.getHours = function() {
+    return hours;
+  }
+
+  self.getMinutes = function() {
+    return minutes;
+  }
+
+  self.getSeconds = function() {
+    return seconds;
+  }
+}</script>
+  <script src="js/app.js"></script>
+</head>
+
+<body>
+
+  <div class="middle-box">
+    <header>
+      <h4 class="text-center">Matching Game</h4>
+    </header>
+
+    <section class="score-panel">
+      <ul id="stars-list" class="stars">
+        <li><i class="fa fa-star"></i></li>
+        <li><i class="fa fa-star"></i></li>
+        <li><i class="fa fa-star"></i></li>
+      </ul>
+      <span id="grade" class="moves"></span>
+
+      <span style="margin: 0px 20px;">
+        <strong><span id="moves-text"></span></strong> Moves
+      </span>
+
+      <span style="margin: 0px 20px;">
+        <strong><span id="time-text"></span></strong>
+      </span>
+
+      <span style="margin: 0px 20px;">
+        <strong><span id="msg-text"></span></strong>
+      </span>
+
+      <div id="info-btn" class="hint">
+        <span><i class="fa fa-info"></i> Info</span>
+      </div>
+      <div id="reset-btn" class="restart">
+        <span><i class="fa fa-repeat"></i> Reset</span>
+      </div>
+    </section>
+
+    <ul id="deck" class="deck" ></ul>
+  </div>
+
+  <!--  -->
+
+  <div id="game_modal" class="modal">
+    <div class="modal-content">
+      <h4>Congrats!</h4>
+      <h5>Game Results</h5>
+
+      <p><strong>Time:</strong> <span id="time_results"></span></p>
+      <p><strong>Moves:</strong> <span id="moves_results"></span></p>
+      <p><strong>Grade:</strong> <span id="grade_results"></span></p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="modal_reset_btn">Replay</a>
+    </div>
+  </div>
+
+</body>
+
+</html>
