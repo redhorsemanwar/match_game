@@ -131,7 +131,6 @@ $(document).ready(function(){
 
           if (thisCard === lastCard) {
             let message = 'match found!';
-            console.log(message);
             flash_msg(message);
             card.classList.add('match');
             lastFlipped.classList.add('match');
@@ -145,7 +144,6 @@ $(document).ready(function(){
           }
           else {
             let message = 'no match.';
-            console.log(message);
             flash_msg(message);
             pause = true;
             setTimeout(function() {
@@ -198,7 +196,6 @@ $(document).ready(function(){
     generateCards();
     activateCards();
     flash_cards();
-    console.log('game started.');
   }
 
   function gameOver() {
@@ -234,7 +231,6 @@ $(document).ready(function(){
     timeText.innerText = watch.getTimeString();
 
     flash_msg('New Game!');
-    console.log('game re-started.');
   }
 
   function flash_msg(message) {
