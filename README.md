@@ -2,6 +2,7 @@
 <B> Resources </B>
 Icons from Font fontawesome.
 Acme from Google Fonts.
+Materialize.
 <B> Intro </B>
 this game is made from 16 cards, you must find 8 pairs to win the game!
 3 stars If the moves are between 8 and 11.
