@@ -50,6 +50,7 @@ $(document).ready(function(){
   gradeSpan.innerText = grade;
   movesText.innerText = moves;
   timeText.innerText = watch.getTimeString();
+	/*shuffleing cards function*/
   function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
     while (currentIndex !== 0) {
@@ -61,6 +62,7 @@ $(document).ready(function(){
     }
     return array;
   }
+	/*create li cards*/
   function createCard(card_class) {
     let li = document.createElement('li');
     li.classList.add('card');
@@ -76,6 +78,7 @@ $(document).ready(function(){
   resetBtn.addEventListener('click', resetGame);
   modal_reset_btn.addEventListener('click', resetGame);
   infoBtn.addEventListener('click', info);
+	//update the grade function
   function updateGrade() {
     if(moves > 12) {
       if(grade !== "Average") {
@@ -164,7 +167,7 @@ $(document).ready(function(){
   function getRandomItem(array_obj) {
     return array_obj[Math.floor(Math.random() * array_obj.length)];
   }
-
+//hint function
   function hint() {
     let hiddenCards = Array.from(document.querySelectorAll('.card')).filter(function(card){
       return card.classList.contains('open') === false;
